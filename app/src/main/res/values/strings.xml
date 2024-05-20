@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Notable</string>
+    <string name="newUser">New User...</string>
+    <string name="email">Enter Your Email...</string>
+    <string name="password">Enter Your Password...</string>
+    <string name="register">Register...</string>
+    <string name="loginC">I Aould Like To Check In?</string>
+    <string name="welcome">Welcome Back...</string>
+    <string name="loginM">Login...</string>
+    <string name="registerL">Don\'t Have An Account? Register Now...</string>
+    <string name="titleH">Title Here...</string>
+    <string name="noteH">Enter Your Note...</string>
+    <string name="notes">MyNotes</string>
+    <string name="emptyEP">Email and Password Cannot Be Left Blank...</string>
+    <string name="five">For your security, enter a password longer than 5 characters...</string>
+    <string name="success">You have successfully registered...</string>
+    <string name="error">An Error Occurred While Registering, Try Again...</string>
+    <string name="successG">You have successfully logged in...</string>
+    <string name="errorG">No Account Found, Please Register...</string>
+    <string name="emptyS">There Should Be No Empty Space...</string>
+    <string name="updateN">Your note has been updated...</string>
+    <string name="eUpdateN">An Error Occurred While Updating Your Grade...</string>
+    <string name="delete">Your note has been deleted...</string>
+    <string name="deleteE">An Error Occurred While Deleting Your Note...</string>
+    <string name="noteE">Please fill in both fields...</string>
+    <string name="noteU">Your note has been created...</string>
+    <string name="noteUE">There was an error creating your note...</string>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notable</string>
+    <string name="newUser">Yeni Kullanıcı...</string>
+    <string name="email">Emailinizi Giriniz...</string>
+    <string name="password">Şifrenizi Giriniz...</string>
+    <string name="register">Kayıt Ol...</string>
+    <string name="loginC">Giriş Yapmak İstiyorum?</string>
+    <string name="welcome">Tekrar Hoşgeldiniz...</string>
+    <string name="loginM">Giriş Yap...</string>
+    <string name="registerL">Hesabın Yok Mu? Hemen Kayıt Ol...</string>
+    <string name="titleH">Baslik Burda...</string>
+    <string name="noteH">Notunuzu Giriniz...</string>
+    <string name="notes">Notlarım</string>
+    <string name="emptyEP">Email ve Şifre Boş Bırakılamaz...</string>
+    <string name="five">Güvenliğiniz için 5 karakterden daha uzun bir şifre giriniz...</string>
+    <string name="success">Başarıyla Kayıt Oldunuz...</string>
+    <string name="error">Kayıt Olurken Bir Hata Oluştu Tekrar Deneyiniz...</string>
+    <string name="successG">Başarıyla Giriş Yaptınız...</string>
+    <string name="errorG">Hesap Bulunumadı Lütfen Kayıt Olunuz...</string>
+    <string name="emptyS">Boş Alan Kalmamalı...</string>
+    <string name="updateN">Notunuz Güncellenmiştir...</string>
+    <string name="eUpdateN">Notunuz Güncellenirken Hata Oluştu...</string>
+    <string name="delete">Notunuz Silinmiştir...</string>
+    <string name="deleteE">Notunuz Silinirken Hata Oluştu...</string>
+    <string name="noteE">İki Alanıda Doldurunuz Lütfen...</string>
+    <string name="noteU">Notunuz Oluşturuldu...</string>
+    <string name="noteUE">Notunuz Oluşturulurken Bir Hata Oldu...</string>
+</resources>

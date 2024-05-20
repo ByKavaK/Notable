@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "78713580482",
+    "project_id": "notable-5eeda",
+    "storage_bucket": "notable-5eeda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78713580482:android:d7dfb6a32ec4de576ac45b",
+        "android_client_info": {
+          "package_name": "com.example.notable"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI5IvEtiVlnPlPfAADolAdQIO-UDhgcv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
