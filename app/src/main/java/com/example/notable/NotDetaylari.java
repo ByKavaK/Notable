@@ -30,6 +30,8 @@ public class NotDetaylari extends AppCompatActivity {
 
         Intent data = getIntent();
 
+
+
         notDuzenleGit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,5 +56,27 @@ public class NotDetaylari extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private String caesarCipherDecrypt(String text, int shift) {
+        String alphabet = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+        String lowerAlphabet = alphabet.toLowerCase();
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (Character.isLetter(c)) {
+                String alphabetToUse = Character.isLowerCase(c) ? lowerAlphabet : alphabet;
+                int baseIndex = alphabetToUse.indexOf(c);
+                if (baseIndex != -1) {
+                    int newIndex = (baseIndex - shift + alphabetToUse.length()) % alphabetToUse.length();
+                    result.append(alphabetToUse.charAt(newIndex));
+                } else {
+                    result.append(c);
+                }
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
     }
 }

@@ -77,8 +77,11 @@ public class NotlarActivity extends AppCompatActivity {
                 int renkKod = getRandomColor();
                 notViewHolder.not.setBackgroundColor(notViewHolder.itemView.getResources().getColor(renkKod, null));
 
-                notViewHolder.notBaslik.setText(firebaseModel.getBaslik());
-                notViewHolder.notIcerik.setText(firebaseModel.getIcerik());
+                String decryptedBaslik = caesarCipherDecrypt(firebaseModel.getBaslik(), 3);  // Şifre çözme
+                String decryptedIcerik = caesarCipherDecrypt(firebaseModel.getIcerik(), 3);  // Şifre çözme
+
+                notViewHolder.notBaslik.setText(decryptedBaslik);
+                notViewHolder.notIcerik.setText(decryptedIcerik);
 
                 String docId = notAdapter.getSnapshots().getSnapshot(i).getId();
 
@@ -87,9 +90,9 @@ public class NotlarActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent intent = new Intent(v.getContext(), NotDetaylari.class);
-                        intent.putExtra("baslik",firebaseModel.getBaslik());
-                        intent.putExtra("icerik",firebaseModel.getIcerik());
-                        intent.putExtra("notId",docId);
+                        intent.putExtra("baslik", decryptedBaslik);
+                        intent.putExtra("icerik", decryptedIcerik);
+                        intent.putExtra("notId", docId);
                         v.getContext().startActivity(intent);
                     }
                 });
@@ -105,9 +108,9 @@ public class NotlarActivity extends AppCompatActivity {
                             public boolean onMenuItemClick(@NonNull MenuItem item) {
 
                                 Intent intent = new Intent(v.getContext(), NotDuzenleActivity.class);
-                                intent.putExtra("baslik",firebaseModel.getBaslik());
-                                intent.putExtra("icerik",firebaseModel.getIcerik());
-                                intent.putExtra("notId",docId);
+                                intent.putExtra("baslik", decryptedBaslik);
+                                intent.putExtra("icerik", decryptedIcerik);
+                                intent.putExtra("notId", docId);
                                 v.getContext().startActivity(intent);
 
                                 return false;
@@ -122,12 +125,12 @@ public class NotlarActivity extends AppCompatActivity {
                                 documentReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
-                                        Toast.makeText(v.getContext(),R.string.delete,Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(v.getContext(), R.string.delete, Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(v.getContext(),R.string.deleteE,Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(v.getContext(), R.string.deleteE, Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
@@ -145,7 +148,7 @@ public class NotlarActivity extends AppCompatActivity {
             @NonNull
             @Override
             public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notlar_layout, parent,false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notlar_layout, parent, false);
                 return new NoteViewHolder(view);
             }
         };
@@ -158,8 +161,7 @@ public class NotlarActivity extends AppCompatActivity {
 
     }
 
-    public class NoteViewHolder extends RecyclerView.ViewHolder
-    {
+    public class NoteViewHolder extends RecyclerView.ViewHolder {
         private TextView notBaslik;
         private TextView notIcerik;
         LinearLayout not;
@@ -170,7 +172,6 @@ public class NotlarActivity extends AppCompatActivity {
             notBaslik = itemView.findViewById(R.id.notBaslik);
             notIcerik = itemView.findViewById(R.id.notIcerik);
             not = itemView.findViewById(R.id.not);
-
         }
     }
 
@@ -183,8 +184,7 @@ public class NotlarActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if(item.getItemId() == R.id.cikisYap)
-        {
+        if (item.getItemId() == R.id.cikisYap) {
             firebaseAuth.signOut();
             Intent intent = new Intent(NotlarActivity.this, MainActivity.class);
             startActivity(intent);
@@ -202,14 +202,12 @@ public class NotlarActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if(notAdapter != null)
-        {
+        if (notAdapter != null) {
             notAdapter.stopListening();
         }
     }
 
-    private int getRandomColor()
-    {
+    private int getRandomColor() {
         List<Integer> renkKod = new ArrayList<>();
         renkKod.add(R.color.gray);
         renkKod.add(R.color.green);
@@ -227,4 +225,26 @@ public class NotlarActivity extends AppCompatActivity {
         return renkKod.get(sayi);
     }
 
+    private String caesarCipherDecrypt(String text, int shift) {
+        String alphabet = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+        String lowerAlphabet = alphabet.toLowerCase();
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (Character.isLetter(c)) {
+                String alphabetToUse = Character.isLowerCase(c) ? lowerAlphabet : alphabet;
+                int baseIndex = alphabetToUse.indexOf(c);
+                if (baseIndex != -1) {
+                    int newIndex = (baseIndex - shift + alphabetToUse.length()) % alphabetToUse.length();
+                    result.append(alphabetToUse.charAt(newIndex));
+                } else {
+                    result.append(c);
+                }
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
 }
+

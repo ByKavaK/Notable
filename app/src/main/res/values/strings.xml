@@ -8,7 +8,7 @@
     <string name="welcome">Welcome Back...</string>
     <string name="loginM">Login...</string>
     <string name="registerL">Don\'t Have An Account? Register Now...</string>
-    <string name="titleH">Title Here...</string>
+    <string name="titleH">Enter Your Title...</string>
     <string name="noteH">Enter Your Note...</string>
     <string name="notes">MyNotes</string>
     <string name="emptyEP">Email and Password Cannot Be Left Blank...</string>

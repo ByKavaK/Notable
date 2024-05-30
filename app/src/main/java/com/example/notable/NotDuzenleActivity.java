@@ -63,10 +63,13 @@ public class NotDuzenleActivity extends AppCompatActivity {
                 }
                 else
                 {
+                    String encryptedBaslik = caesarCipherEncrypt(yeniBaslik, 3);  // Şifreleme
+                    String encryptedIcerik = caesarCipherEncrypt(yeniIcerik, 3);  // Şifreleme
+
                     DocumentReference documentReference = firebaseFirestore.collection("notlar").document(firebaseUser.getUid()).collection("notlarım").document(data.getStringExtra("notId"));
                     Map<String, Object> not = new HashMap<>();
-                    not.put("baslik", yeniBaslik);
-                    not.put("icerik", yeniIcerik);
+                    not.put("baslik", encryptedBaslik);
+                    not.put("icerik", encryptedIcerik);
                     documentReference.set(not).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
@@ -86,6 +89,7 @@ public class NotDuzenleActivity extends AppCompatActivity {
 
         String notBaslik = data.getStringExtra("baslik");
         String notIcerik = data.getStringExtra("icerik");
+
         notBaslikDuzenle.setText(notBaslik);
         notIcerikDuzenle.setText(notIcerik);
 
@@ -100,5 +104,26 @@ public class NotDuzenleActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private String caesarCipherEncrypt(String text, int shift) {
+        String alphabet = "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ";
+        String lowerAlphabet = alphabet.toLowerCase();
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (Character.isLetter(c)) {
+                String alphabetToUse = Character.isLowerCase(c) ? lowerAlphabet : alphabet;
+                int baseIndex = alphabetToUse.indexOf(c);
+                if (baseIndex != -1) {
+                    int newIndex = (baseIndex + shift) % alphabetToUse.length();
+                    result.append(alphabetToUse.charAt(newIndex));
+                } else {
+                    result.append(c);
+                }
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
     }
 }
